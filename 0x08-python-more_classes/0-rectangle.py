@@ -9,4 +9,3 @@ defines a rectangle
 
 class Rectangle:
     """This class defines the rectangle"""
-    pass
