@@ -8,6 +8,7 @@ on an nxn grid such that they are all in non-attacking positions
 
 import sys
 
+
 def is_safe(board, row, col):
     # Check if the given position is safe for a queen
     n = len(board)
@@ -24,6 +25,7 @@ def is_safe(board, row, col):
         if board[i][j] == 1:
             return False
     return True
+
 
 def nqueens(board, col, solutions):
     n = len(board)
@@ -44,6 +46,7 @@ def nqueens(board, col, solutions):
             nqueens(board, col+1, solutions)
             # Backtrack
             board[row][col] = 0
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
