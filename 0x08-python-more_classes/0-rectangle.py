@@ -1,7 +1,10 @@
 #!/usr/bin/bash
 
 """
-This modudule contains an empty class of a Rectangle
+This module contains an empty class of a Rectangle
+
+The class is empty
+
 """
 
 
