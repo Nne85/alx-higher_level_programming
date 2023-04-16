@@ -22,10 +22,10 @@ def add_integer(a, b=98):
         TypeError: If a or b is not an integer or a float.
 
     """
-    if not isinstance(a, (int, float)):
+    data = (int, float)
+
+    if not isinstance(a, (int, data)):
         raise TypeError("a must be an integer")
-    if not isinstance(b, (int, float)):
+    if not isinstance(b, (int, data)):
         raise TypeError("b must be an integer")
-    if (a + b) == float('inf') or (a + b) == -float('inf'):
-        return b 
     return int(a) + int(b)

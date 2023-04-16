@@ -1,12 +1,12 @@
-Test cases for 0-add_integer module
+The `0-add_integer` module
 ===========================
 
-The 0-add_integer module takes two integers or floats as arguments and returns their sum
+Using the function `add_integer`
 -------------------------------
 
 This function adds two numbers together. The two numbers can only be any of these 2 types
-1. int
-2. float
+1. Integer or int
+2. Float
 
 Any other data types will raise an error. Below is an example on how to use the function 
 Step 1 ==> First import it
@@ -80,3 +80,8 @@ Below are several success and failed Test cases for the functions:
 	>>> add_integer(None, None)
 	Traceback (most recent call last):
 	TypeError: a must be an integer
+	
+	Test for special NaN in python (not a number)
+	>>> print(add_integer(float("NaN")))
+	Traceback (most recent call last):
+	ValueError: cannot convert float NaN to integer
