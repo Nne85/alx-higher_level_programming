@@ -4,6 +4,7 @@ Base Module
 """
 import json
 import csv
+import turtle
 
 
 class Base:
@@ -111,3 +112,44 @@ class Base:
                 return [cls.create(**item) for item in ld]
         except FileNotFoundError:
             return []
+
+        @staticmethod
+    def draw(list_rectangles, list_squares):
+        """Draw the rectangle and the square using turtle module
+
+        Args:
+            list_rectangle: List of rectangle objects
+            list_squares: List of square objects
+        """
+        tur = turtle.Turtle()
+        tur.screen.bgcolor("#b6578f")
+        tur.pensize(2)
+        tur.shape("square")
+
+        tur.color("#ffffff")
+        for rec in list_rectangles:
+            tur.showturtle()
+            tur.up()
+            tur.goto(rec.x, rec.y)
+            tur.down()
+            for i in range(2):
+                tur.forward(rec.width)
+                tur.left(90)
+                tur.forward(rec.height)
+                tur.left(90)
+            tur.hideturtle()
+            tur.color("#e8543f")
+
+        for sqr in list_squares:
+            tur.showturtle()
+            tur.up()
+            tur.goto(sqr.x, sqr.y)
+            tur.down()
+            for i in range(2):
+                tur.forward(sqr.width)
+                tur.left(90)
+                tur.forward(sqr.height)
+                tur.left(90)
+            tur.hideturtle()
+
+        turtle.exitonclick()
