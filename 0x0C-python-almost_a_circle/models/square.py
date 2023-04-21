@@ -1,113 +1,81 @@
 #!/usr/bin/python3
+
 """
-Base Module
+This module contains a class that inherits from another class
+Rectangle.
 """
-import json
-import csv
+from models.rectangle import Rectangle
 
 
-class Base:
-    """
-    The Base Class
+class Square(Rectangle):
+    """This class inherits all the methods and attributes
+    of the class Rectangle to make a square
+
     Attributes:
-        __nb_object : private class atribute
+        Fields:
+            size: The size of the square
+            x
+            y
+
+        Methods:
+            __init__(self, size, x=0, y=0, id=None)
+            super().__init__(size, size, x, y, id)
+            __str__(self)
+            size(self): The size getter
+            size(self, value): The size setter
+            update(self, *args, **kwargs)
+            to_dictionary(self)
     """
-    __nb_objects = 0
 
-    def __init__(self, id=None):
+    def __init__(self, size, x=0, y=0, id=None):
+        super().__init__(size, size, x, y, id)
+
+        self.size = size
+
+    @property
+    def size(self):
+        """Return the sizes of the square based on class
+        Rectangle
         """
-        Init
-        Attributes:
-            id (): id
+        return self.height
+
+    @size.setter
+    def size(self, value):
+        """Set new value for the square based on
+        Rectangle class
         """
-        if id is not None:
-            self.id = id
+        self.width = value
+        self.height = value
+
+    def __str__(self):
+        """Print instance in string"""
+        return "[{}] ({}) {}/{} - {}".format(
+                self.__class__.__name__, self.id,
+                self.x, self.y, self.width)
+
+    def update(self, *args, **kwargs):
+        """Update the attribute values"""
+        if args and len(args) != 0:
+            for i, arg in enumerate(args):
+                if i == 0:
+                    self.id = arg
+                elif i == 1:
+                    self.size = arg
+                elif i == 2:
+                    self.x = arg
+                elif i == 3:
+                    self.y = arg
         else:
-            Base.__nb_objects += 1
-            self.id = Base.__nb_objects
+            for key in kwargs:
+                if key == "id":
+                    self.id = kwargs[key]
+                elif key == "size":
+                    self.size = kwargs[key]
+                elif key == "x":
+                    self.x = kwargs[key]
+                elif key == "y":
+                    self.y = kwargs[key]
 
-    @staticmethod
-    def to_json_string(list_dictionaries):
-        """
-            Return A JSON STRING a representation list_dict..
-        """
-        if not list_dictionaries:
-            return "[]"
-        return json.dumps(list_dictionaries)
-
-    @classmethod
-    def save_to_file(cls, list_objs):
-        """
-            Save Dict To Json
-        """
-        d = []
-        with open(cls.__name__ + ".json", "w", encoding="utf-8") as f:
-            if list_objs:
-                for obj in list_objs:
-                    d.append(obj.to_dictionary())
-            f.write(cls.to_json_string(d))
-
-    @staticmethod
-    def from_json_string(json_string):
-        """
-            Write Json Representation of String
-        """
-        if not json_string:
-            return []
-        return json.loads(json_string)
-
-    @classmethod
-    def create(cls, **dictionary):
-        """
-            returns an instance with
-            all attributes already set
-        """
-        if cls.__name__ == 'Rectangle':
-            a = cls(1, 1)
-        if cls.__name__ == 'Square':
-            a = cls(1)
-        a.update(**dictionary)
-        return a
-
-    @classmethod
-    def load_from_file(cls):
-        """
-            Load List of Instance from JSON File
-        """
-        try:
-            with open(cls.__name__ + ".json", "r") as f:
-                return [cls.create(**dictionary) for
-                        dictionary in cls.from_json_string(f.read())]
-        except FileNotFoundError:
-            return []
-
-    @classmethod
-    def save_to_file_csv(cls, list_objs):
-        """save_to_file_csv"""
-        ld = []
-        with open(cls.__name__ + ".csv", "w", encoding="utf-8") as f:
-            if list_objs:
-                for obj in list_objs:
-                    if cls.__name__ == 'Rectangle':
-                        ld.append([
-                            obj.id, obj.width, obj.height, obj.x, obj.y])
-                    if cls.__name__ == 'Square':
-                        ld.append([obj.id, obj.size, obj.x, obj.y])
-            writer = csv.writer(f)
-            for row in ld:
-                writer.writerow(row)
-
-    @classmethod
-    def load_from_file_csv(cls):
-        """load_from_file_csv"""
-        try:
-            with open(cls.__name__ + ".csv", "r") as f:
-                ld = []
-                reader = csv.DictReader(f)
-                for row in reader:
-                    for key, val in row.items():
-                        row[key] = int(val)
-                ld.append(row)
-                return [cls.create(**item) for item in ld]
-        except FileNotFoundError:
-            return []
+    def to_dictionary(self):
+        """Return dictionary representation of square"""
+        return {'id': self.id, 'size': self.width, 'x': self.x, 'y': self.y}
