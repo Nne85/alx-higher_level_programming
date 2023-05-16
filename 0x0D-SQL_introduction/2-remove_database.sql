@@ -1,2 +1,1 @@
--- This script deletes database
-DROP DATABASE IF EXITS hbtn_0c_0;
+VimCrypt~03!¬ºŞåÿĞM‹–X™ï¹æSµóÆ0¨¸^Î7lá× äcƒµL^—…,\/Œ/,ıŞ:[ñ·ÍpC¨yJøâ›İ*Ø“ö·ç,º_æå­d­
