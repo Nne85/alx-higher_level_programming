@@ -1,23 +1,8 @@
 #!/usr/bin/node
 const fs = require('fs');
-
-const fileA = process.argv[2];
-const fileB = process.argv[3];
-const fileC = process.argv[4];
-
-if (
-  fs.existsSync(fileA) &&
-fs.statSync(fileA).isFile &&
-fs.existsSync(fileB) &&
-fs.statSync(fileB).isFile &&
-fileC !== undefined
-) {
-  const fileAContent = fs.readFileSync(fileA);
-  const fileBContent = fs.readFileSync(fileB);
-  const stream = fs.createWriteStream(fileC);
-
-  stream.write(fileAContent);
-  stream.write(fileBContent);
-  stream.end();
-}
-console.log(`Files ${fileA} and ${fileB} have been concatenated to ${fileC}.`);
+const A = process.argv[2];
+const B = process.argv[3];
+const C = process.argv[4];
+const tA = fs.readFileSync(A, 'utf8');
+const tB = fs.readFileSync(B, 'utf-8');
+fs.writeFileSync(C, tA + tB);
