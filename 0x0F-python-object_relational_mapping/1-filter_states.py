@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """
-Moduule lists state in hbtn_0e_0_usa
+Module that lists states names starting with 'N' from database
 """
-import MySQLdb
 import sys
+import MySQLdb
 
 
 def main():
@@ -12,20 +12,16 @@ def main():
             port=3306,
             user=sys.argv[1],
             passwd=sys.argv[2],
-            db=sys.argv[3]
+            db=sys.argv[3],
             )
-    # Create a cursor object
     cursor = db.cursor()
-    # Execute the SELECT statement
-    query = "SELECT * FROM states ORDER BY id ASC"
+    query = "SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC"
     cursor.execute(query)
-    rows = cursor.fetchall()
 
-    # Display the results
+    rows = cursor.fetchall()
     for row in rows:
         print(row)
 
-    # Close the cursor and database connection
     cursor.close()
     db.close()
 

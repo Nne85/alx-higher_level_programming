@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """
-Moduule lists state in hbtn_0e_0_usa
+Module that displays all values in the states table of hbtn_0e_0_usa
 """
-import MySQLdb
 import sys
+import MySQLdb
 
 
 def main():
@@ -14,11 +14,19 @@ def main():
             passwd=sys.argv[2],
             db=sys.argv[3]
             )
+
+    search_name = sys.argv[4]
     # Create a cursor object
     cursor = db.cursor()
+    
+    # Create the SQL query using format
+    query = "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC"\
+            .format(search_name)
+
     # Execute the SELECT statement
-    query = "SELECT * FROM states ORDER BY id ASC"
     cursor.execute(query)
+
+    # Fetch all the rows
     rows = cursor.fetchall()
 
     # Display the results

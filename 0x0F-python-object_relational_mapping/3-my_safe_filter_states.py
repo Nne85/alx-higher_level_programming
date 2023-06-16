@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 """
-Moduule lists state in hbtn_0e_0_usa
+Module  takes in arguments and displays all values
+in the states table of hbtn_0e_0_usa where name matches the argument
 """
-import MySQLdb
 import sys
+import MySQLdb
 
 
 def main():
@@ -14,14 +15,17 @@ def main():
             passwd=sys.argv[2],
             db=sys.argv[3]
             )
-    # Create a cursor object
+    search_name = sys.argv[4]
     cursor = db.cursor()
-    # Execute the SELECT statement
-    query = "SELECT * FROM states ORDER BY id ASC"
-    cursor.execute(query)
+    query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
+
+    # Execute the SELECT statement with the parameterized query
+    cursor.execute(query, (search_name,))
+
+    # Fetch all rows
     rows = cursor.fetchall()
 
-    # Display the results
+    # Display results
     for row in rows:
         print(row)
 
