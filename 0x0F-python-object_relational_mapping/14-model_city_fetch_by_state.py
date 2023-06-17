@@ -35,5 +35,5 @@ if __name__ == "__main__":
         all()
 
     # Print the results
-    for city, state_name in cities:
-        print("{}: ({}) {}".format(state_name, city.id, city.name))
+    for City, state_name in cities:
+        print("{}: ({}) {}".format(state_name, City.id, City.name))

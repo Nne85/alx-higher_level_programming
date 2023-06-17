@@ -40,3 +40,5 @@ if __name__ == "__main__":
 
     # Print the new state's id
     print(new_state.id)
+
+    session.close()

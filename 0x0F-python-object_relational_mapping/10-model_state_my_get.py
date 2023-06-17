@@ -35,3 +35,5 @@ if __name__ == "__main__":
         print(state.id)
     else:
         print("Not found")
+
+    session.close()    
