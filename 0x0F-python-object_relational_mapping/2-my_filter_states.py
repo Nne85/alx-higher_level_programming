@@ -18,7 +18,7 @@ def main():
     search_name = sys.argv[4]
     # Create a cursor object
     cursor = db.cursor()
-    
+
     # Create the SQL query using format
     query = "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC"\
             .format(search_name)
@@ -31,7 +31,8 @@ def main():
 
     # Display the results
     for row in rows:
-        print(row)
+        if row[1] == search_name:
+            print(row)
 
     # Close the cursor and database connection
     cursor.close()
