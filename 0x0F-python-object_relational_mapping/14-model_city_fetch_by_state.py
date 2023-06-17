@@ -31,8 +31,8 @@ if __name__ == "__main__":
     session = Session()
 
     # Query all City objects and their corresponding State names
-    cities = session.query(City, State.name).join(State).order_by(City.id).\
-        all()
+    cities = session.query(City, State.name).filter(City.state_id == State.id)\
+        .order_by(City.id).all()
 
     # Print the results
     for City, state_name in cities:
